@@ -1,0 +1,123 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[slovene]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{nopageno}
+\usepackage{lmodern}
+\usepackage{eurosym}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\DeclareUnicodeCharacter{2212}{-}
+\usepackage{graphicx}
+\usepackage{subfig}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+\Huge 
+\textbf{Skupina 22: \textsl{k}-means algoritem}
+
+\vspace{1cm}
+\Large
+\textbf{Opis problema in načrt dela}
+
+\vspace{1cm}
+\large
+Projekt v povezavi s predmetom Operacijske raziskave
+
+
+\vspace{2,5cm}
+\large
+Avtorja:\\
+\textbf{Matevž Raspet, Eva Šraj}\\
+
+\vfill
+
+\Large Ljubljana, november 2018
+
+\end{center}
+\end{titlepage}
+
+\newpage
+
+\section{\textbf{OPIS PROBLEMA in NAČRT DELA}}
+
+\noindent Pri projektu iz predmeta Operacijskih raziskav bova preučevala delovanje \textsl{k}-means algoritma. \\ 
+
+\noindent \textsl{K}-means algoritem je metoda vektorske kvantizacije, namenjena za analizo grupiranja podatkov, predvsem pri rudarjenju s podatki. Ta algoritem naredi particijo $n$ meritev v $k$ različnih grup, v katerih vsaka meritev pripada grupi z najbližjo povprečno vrednostjo. Rezultat particije je razdelitev prostora v Voronojeve celice. \\
+\noindent Bolj formalno: naj bodo $(x_1, x_2, \ldots,x_n)$ dane meritve, kjer je vsaka meritev $x_i$ $d$-dimenzionalen realni vektor. \textsl{K}-means algoritem napravi particijo $n$ meritev v $k  (\leq n)$ množic $S= \{S_1, S_2, \ldots, S_k\}$, na podlagi najmanjše vsote kvadratov razdalj med meritvami posamezne množice in njihovim povprečjem $\mu_i$.
+
+\begin{align*}
+\arg\min_{S} \sum_{i = 1}^k \sum_{x \in S_i} \| x - \mu_i \|^2 = \arg \min_{S} \sum_{i = 1}^k |S_i| \cdot Var(S_i),
+\end{align*}
+
+
+\noindent S pomočjo dveh metod bova zgenerirala in predstavila naključne podatke v prostorih $\mathbb{R}$, $\mathbb{R}^2$ in $\mathbb{R}^3$. Ti dve metodi sta: \textbf{metoda Manhattan} in \textbf{metoda najmanjših kvadratov} (krajše MNK). Uporabila ju bova na praktičnih življenjskih primerih, kot npr. \textsl{problem najbolj obiskane trgovine}. \\
+
+\noindent Nato bova \textsl{k}-means algoritem uporabila na množicah, z 10\% najbolj odstopajočimi meritami ter primerjala rezultata dobljena z Manhattan metodo in MNK. \\
+
+\noindent Na koncu bova za množice, ki so generirane v prostoru $\mathbb{R}^2$, poiskala povezavo med \textsl{k}-means algoritmom in \textsc{Voronojevim diagramom} ter rešitev prikazala grafično.
+
+\subsection{\textbf{NEZNANI POJMI}}
+
+\noindent Kot sva omenila že zgoraj, bova pri projektu uporabila 2 metodi za računanje razdalj:
+\begin{itemize}
+	\item Manhattan metodo in
+	\item metodo najmanjših kvadratov.
+\end{itemize}
+
+\newpage
+
+\noindent \textbf{Definicija:} Naj bosta $X$ in $Y$ $n$-razsežna vektorja; $X = (x_1, x_2, \ldots, x_n)$ in $Y = (y_1, y_2,\ldots, y_n).$ \\
+\noindent Razdalja po \textbf{metodi Manhattan} je definirana kot: 
+\begin{align*}
+d(X, Y) = \sum_{i = 1}^n | x_i - y_i |
+\end{align*}
+\noindent Po \textbf{metodi najmanjših kvadratov} razdaljo definiramo kot:
+\begin{align*}
+d(X, Y) = \sqrt {\sum_{i = 1}^n (x_i - y_i)^2}
+\end{align*}
+
+\noindent \textsc{Voronojev diagram}
+
+\noindent V matematiki Voronojev diagram prikazuje razdelitev ploskve na območja, osnovana na razdalji točk v posameznih podmnožicah območij. 
+
+\vspace{0,5 cm}
+
+\noindent \textbf{Definicija:} Naj bo $X$ metrični prostor z razdaljo $d$, $K$ indeksna množica in $P_k$ $(k \in K)$ nabor nepraznih podmnožic v (metričnem) prostoru $X$. Voronoijeva celica ali območje $R_k$ povezano s $P_k$, je množica točk v $X$, katerih razdalja do $P_k$ ni večja od razdalj do drugih $P_j$, kjer je $j$ poljuben indeks različen od k $(j \neq k)$. \\
+
+\noindent Z drugimi besedami: če je $d(x,A) = \inf\{d(x,a) | a \in A\}$ razdalja med $X$ in $A$, je nato Voronojev diagram nabor celic $(R_k)_{k \in K}$, kjer je
+
+\begin{equation*}
+R_k = \{ x \in X | d(x, P_k) \leq d(x, P_j)   za vse j \neq k \}
+\end{equation*}
+
+\subsection{\textbf{POTEK DELA S PRAKTIČNIM PRIMEROM}}
+
+\noindent Kot enostaven primer bova preučevala \textsl{problem najbolj obiskane trgovine}. \\
+\noindent Za množico bova vzela trgovine v nekem mestu. Predpostavila bova, da imajo v vseh trgovinah produkte z enako ceno in kvaliteto. Razumljivo je, da je kupčeva izbira odvisna le od njegove razdalje do trgovin (kupci bodo kupovali v njim najbližji trgovini). Midva pa želiva oceniti število kupcev v posamezni trgovini.
+
+\vspace{0,5 cm}
+
+\noindent V tem primeru je Voronoijeva celica/območje $R_k$ dane trgovine $P_k$ približna ocena števila kupcev, ki bodo kupovali v tej trgovini $ P_k$ (trgovine so v našem modelu predstavljene kot točke v mestu). \\
+\noindent Za večino mest bova razdaljo med točkami izmerila s pomočjo metode Manhattan in MNK.
+Pripadajoča grafa izgledata približno takole:
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width = 7cm]{Euclidean_Voronoi_Diagram.png}
+\caption{Voronojev diagram z MNK}
+\end{figure}
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width = 7cm]{Manhattan_Voronoi_Diagram.png}
+\caption{Voronojev diagram z Manhattan metodo}
+\end{figure}
+
+
+\end{document}
