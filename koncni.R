@@ -41,9 +41,8 @@ konec$cluster <- as.factor(krvne_skupine$cluster) # v tabeli konec doda stolpec 
 
 # graf
 graf_MNK <- ggplot(konec, aes(x = delez, y = variable, color = cluster)) +
-  ggtitle("Delež krvnih skupin v državah sveta") + xlab("Delež")  +
-  geom_point() +
-  scale_color_manual(name="Tip krvne skupine", values=c("1","2","3","4","5","6","7","8"), labels=c("AB+", "A+", "0-","AB-","A-","B+","B-","0+"))
+  ggtitle("Delež krvnih skupin v izbranih evropskih državah") + xlab("Delež")  +
+  geom_point()
 graf_MNK
 
 # GRUPIRANJE Z METODO MANHATTAN
@@ -56,9 +55,8 @@ krvne_skupine1$cluster <- as.factor(krvne_skupine1$cluster)
 
 # graf # mogoče y = 0 vse na eni premici
 graf_Manhattan <- ggplot(konec, aes(x = delez, y = variable, color = krvne_skupine1$cluster)) +
-  ggtitle("Delež krvnih skupin v državah sveta") + xlab("Delež")  +
-  geom_point() +
-  scale_color_manual(name="Tip krvne skupine", values=c("1","2","3","4","5","6","7","8"), labels=c("AB+", "A+", "0-","AB-","A-","B+","B-","0+"))
+  ggtitle("Delež krvnih skupin v izbranih evropskih državah") + xlab("Delež")  +
+  geom_point()
 graf_Manhattan
 
 ### OPOMBA : graf nama je na premici izrisal delež osmih razliènih krvnih skupin v vseh državah sveta.
