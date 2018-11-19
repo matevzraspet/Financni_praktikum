@@ -44,3 +44,24 @@ ggplot(igralci, aes(asistence, zadeti.goli, color = pozicija)) +
   ggtitle("Igralne pozicije") + xlab("Asistence") + ylab("Zadeti goli") +
   geom_point() 
 
+library(deldir)
+library(ggplot2)
+
+
+voronoi <- deldir(igralci$asistence, igralci$zadeti.goli)
+
+#Now we can make a plot
+ggplot(data=igralci, aes(x=asistence,y=zadeti.goli)) +
+  #Plot the voronoi lines
+  geom_segment(
+    aes(x = x1, y = y1, xend = x2, yend = y2),
+    size = 2,
+    data = voronoi$dirsgs,
+    linetype = 1,
+    color= "#FFB958") + 
+  #Plot the points
+  geom_point(
+    fill=rgb(70,130,180,255,maxColorValue=255),
+    pch=21,
+    size = 4,
+    color="#333333") 
