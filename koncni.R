@@ -42,11 +42,9 @@ konec$cluster <- as.factor(krvne_skupine$cluster) # v tabeli konec doda stolpec 
 # graf
 graf_MNK <- ggplot(konec, aes(x = delez, y = variable, color = cluster)) +
   ggtitle("Delež krvnih skupin v državah sveta") + xlab("Delež")  +
-  geom_point() 
+  geom_point() +
+  scale_color_manual(name="Tip krvne skupine", values=c("1","2","3","4","5","6","7","8"), labels=c("AB+", "A+", "0-","AB-","A-","B+","B-","0+"))
 graf_MNK
-
-### VPRAŠANJE: legend(name="Tip krvne skupine",rename(c("1","2","3","4","5","6","7","8"),c("AB+", "A+", "0-","AB-","A-","B+","B-","0+")))
-# PREMENOVANJE CLUSTER 1-8 V TIPE KRVNIH SKUPIN 
 
 # GRUPIRANJE Z METODO MANHATTAN
 set.seed(20)
@@ -59,10 +57,10 @@ krvne_skupine1$cluster <- as.factor(krvne_skupine1$cluster)
 # graf # mogoče y = 0 vse na eni premici
 graf_Manhattan <- ggplot(konec, aes(x = delez, y = variable, color = krvne_skupine1$cluster)) +
   ggtitle("Delež krvnih skupin v državah sveta") + xlab("Delež")  +
-  geom_point()
+  geom_point() +
+  scale_color_manual(name="Tip krvne skupine", values=c("1","2","3","4","5","6","7","8"), labels=c("AB+", "A+", "0-","AB-","A-","B+","B-","0+"))
 graf_Manhattan
-### +rename(c("1","2","3","4","5","6","7","8"),c("AB-", "B-", "A-","0-","AB+","B+","A+","0+")) treba zamenjati imena v legendi
 
-### Opomba : graf nama je na premici izrisal delež osmih razliènih krvnih skupin v vseh državah sveta.
+### OPOMBA : graf nama je na premici izrisal delež osmih razliènih krvnih skupin v vseh državah sveta.
 ### Na podlagi deležev pojavitev posameznih krvnih skupin, smo pogrupirali podatke v osem razliènih skupin.
 ### Vidimo, da se najveè pojavljata krvni skupini 0+ in A+, najmanj pa B- in AB- .
