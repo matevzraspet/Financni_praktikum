@@ -28,7 +28,8 @@ ggplot(umrljivost, aes(x=starost, y=stevilo,color =umrli$cluster)) + geom_point(
   scale_color_manual(name="Kritične starosti:", values=c("red","green","blue"), labels=c("najbolj", "srednje", "najmanj"))
 
 ########### voronojev diagram kot opcija
-
+library(deldir)
+library(ggplot2)
 
 voronoi <- deldir(umrljivost$starost, umrljivost$stevilo)
 
