@@ -54,7 +54,7 @@ igralci$grupe <- as.factor(grupe)
 graf_MNK <- ggplot(igralci, aes(asistence, zadeti.goli, color = grupe)) +
   ggtitle("Izračun igralnih pozicij s pomočjo grupiranja") + xlab("Asistence") + ylab("Zadeti goli") +
   geom_point() +
-  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("obramba", "sredina", "napad"))
+  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("sredina", "napad", "obramba"))
 graf_MNK
 
 # OUTLIERS
@@ -71,7 +71,7 @@ igralci.brez.odstopanja <- igralci[-c(odstopanja),] # odstranim 10% najbolj odst
 graf_MNK_outliers <- ggplot(igralci.brez.odstopanja, aes(x = asistence, y = zadeti.goli, color = grupe)) +
   ggtitle("Izračun igralnih pozicij s pomočjo grupiranja") + xlab("Asistence") + ylab("Zadeti goli") +
   geom_point() +
-  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("obramba", "sredina", "napad"))
+  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("sredina", "napad", "obramba"))
 graf_MNK_outliers
 
 
@@ -87,7 +87,7 @@ igralci$grupe1 <- as.factor(grupe1)
 graf_Manhattan <- ggplot(igralci, aes(asistence, zadeti.goli, color = grupe)) +
   ggtitle("Izračun igralnih pozicij s pomočjo grupiranja") + xlab("Asistence") + ylab("Zadeti goli") +
   geom_point() +
-  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("obramba", "sredina", "napad"))
+  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("sredina", "napad", "obramba"))
 graf_Manhattan
 
 # OUTLIERS
@@ -99,7 +99,7 @@ igralci.brez.odstopanja1 <- igralci[-c(odstopanja1),] # odstranim 10% najbolj od
 graf_Manhattan_outliers <- ggplot(igralci.brez.odstopanja1, aes(x = asistence, y = zadeti.goli, color = grupe)) +
   ggtitle("Izračun igralnih pozicij s pomočjo grupiranja") + xlab("Asistence") + ylab("Zadeti goli") +
   geom_point() +
-  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("obramba", "sredina", "napad"))
+  scale_color_manual(name="Tip igralne pozicije", values=c("red","green","blue"), labels=c("sredina", "napad", "obramba"))
 graf_Manhattan_outliers
 
 ##### VORONOJ PRAVI
