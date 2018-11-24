@@ -24,6 +24,9 @@ umrljivost$stevilo <- as.numeric(umrljivost$stevilo)
 graf2 <- ggplot(umrljivost, aes(x=starost, y=stevilo)) + geom_point()  + facet_grid(~ spol)
 graf2
 
+
+
+
 # GRUPIRANJE PO METODI NAJMANJŠIH KVADRATOV
 set.seed(20)
 dist(umrljivost, method = "euclidean") # vrne matriko razdalj po MNK
@@ -125,3 +128,43 @@ P <- voronoi.polygons(V)
 plot(aaa,pch = 19,xlab= "Starost", ylab= "Število",col = CL5[umrli$cluster])
 points(umrli$centers[,1], umrli$centers[,2],pch = 3, cex = 1.5, lwd = 2)
 plot(V,add = TRUE)
+
+
+############## iskanje optimalnega K z Elbow method
+
+library(factoextra)
+library(cluster)
+library(NbClust)
+
+
+
+set.seed(123)
+# Compute and plot wss for k = 2 to k = 15
+k.max <- 15 # Maximal number of clusters
+data <- umrljivost[,c(1,3)]
+wss <- sapply(1:k.max, 
+              function(k){kmeans(data, k, nstart=10 )$tot.withinss})
+
+plot(1:k.max, wss,
+     type="b", pch = 19, frame = FALSE, 
+     xlab="Number of clusters K",
+     ylab="Total within-clusters sum of squares")
+abline(v = 3, lty =2)
+
+
+fviz_nbclust(umrljivost[,c(1,3)], kmeans, method = "wss") +
+  geom_vline(xintercept = 3, linetype = 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
