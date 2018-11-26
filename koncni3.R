@@ -18,7 +18,7 @@ tabela$avti1 <- as.factor(avti1)
 
 data("mtcars")
 tabela <- na.omit(mtcars)
-a <- plot_ly(tabela, x = ~mpg, y = ~hp, z = ~qsec,color =avti1) %>%
+a <- plot_ly(tabela, x = ~mpg, y = ~hp, z = ~qsec,color =avti1, text = ~rownames(tabela)) %>%
   add_markers() %>% 
   layout(scene = list(xaxis = list(title = 'prevožene milje z 1 galono'), 
                       yaxis = list(title = 'stevilo konjskih moči'), 
