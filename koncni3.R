@@ -5,20 +5,24 @@ library(plotly)
 ### Hotela sva analizirati kateri vrsti avtomobilov so najbolj prijazni za različne tipe voznikov. 
 ## Primerjala sva različne znamke avtomobilov glede na razdaljo, ki jo lahko prevozijo z eno galono, številom konjskih moči in pa čas v katerem lahko prevozilo 1/4 milje.
 ## Sam sem najbolj zainteresiran za znamke modrih pik spodaj( relativno veliko prevozijo z eno galono, glede na njihov nizek čas na 1/4 milje in sorazmerno veliko količino konjev).
+
+# tukaj sva izvedla še kmeans algoritem na trorazsežnih podatkih
+
 data("mtcars")
 tabela <- na.omit(mtcars)
 
-set.seed(20)
+###tukaj izvajamo kmeans algoritem po evklidski metodi
+set.seed(20)  
 dist(tabela, method = "euclidean") # vrne matriko razdalj po MNK
-avti<- kmeans(tabela[,c(1,4,7)], 4, nstart = 20)
+avti<- kmeans(tabela[,c(1,4,7)], 4, nstart = 20) #kmeans algoritem bova naredila glede na parametre mpg,hp,qsec; tukaj pripravimo kmeans grupiranje v 4 množice
 avti
 
-avti1<- avti$cluster
-tabela$avti1 <- as.factor(avti1)
+avti1<- avti$cluster   ## vsebuje podatke kateri množici od 1-4 pripada določen tip avta
+tabela$avti1 <- as.factor(avti1) ##samo po vrsti številsko napiše množice od 1-4 katerim po vrsti pripadajo podatki
 
 data("mtcars")
-tabela <- na.omit(mtcars)
-a <- plot_ly(tabela, x = ~mpg, y = ~hp, z = ~qsec,color =avti1, text = ~rownames(tabela)) %>%
+tabela <- na.omit(mtcars)  #izbriši vrstice ki vsebujejo NA podatke
+a <- plot_ly(tabela, x = ~mpg, y = ~hp, z = ~qsec,color =avti1, text = ~rownames(tabela)) %>%   ## narišemo trorazsežni graf
   add_markers() %>% 
   layout(scene = list(xaxis = list(title = 'prevožene milje z 1 galono'), 
                       yaxis = list(title = 'stevilo konjskih moči'), 
@@ -28,7 +32,7 @@ a
 
 
 
-set.seed(20)
+set.seed(20)  ### izvedemo še kmeans algoritem po metodi manhattan
 dist(tabela, method = "manhattan") # vrne matriko razdalj po MNK
 avti3<- kmeans(tabela[,c(1,4,7)], 4, nstart = 20)
 avti3

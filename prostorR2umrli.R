@@ -166,20 +166,20 @@ library(factoextra)
 library(cluster)
 library(NbClust)
 
-set.seed(123)
+set.seed(123)  
 k.max <- 15 # največje število grup
-data <- umrljivost[,c(1,3)]
+data <- umrljivost[,c(1,3)] #stolpca starost in število
 wss <- sapply(1:k.max, 
-              function(k){kmeans(data, k, nstart=10 )$tot.withinss})
+              function(k){kmeans(data, k, nstart=10 )$tot.withinss})  ## izračuna kmeans$tot.withinss za k = 1:15
 
-plot(1:k.max, wss,
+plot(1:k.max, wss,   ### narišemo graf optimalnega k
      type="b", pch = 19, frame = FALSE, 
-     xlab="Number of clusters K",
-     ylab="Total within-clusters sum of squares")
+     xlab="število množic k",
+     ylab="Total within-cluster sum of squares",
+     main = "Optimalno število množic")
 abline(v = 3, lty =2)
 
-fviz_nbclust(umrljivost[,c(1,3)], kmeans, method = "wss") +
-  geom_vline(xintercept = 3, linetype = 2)
+
 
 
 
